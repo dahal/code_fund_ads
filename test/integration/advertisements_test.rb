@@ -219,7 +219,7 @@ class AdvertisementsTest < ActionDispatch::IntegrationTest
 
   test "js: property will show targeted premium campaign over a zero balance campaign with assigned property" do
     user = copy users: :advertiser,
-                email: Faker::Internet.email,
+                email: Faker::Internet.email(name: "#{user.to_s} #{SecureRandom.hex[0, 8]}", separators: "-")
                 password: "password",
                 password_confirmation: "password",
                 organization: copy(organizations: :default, balance: Money.new(0, "USD"))

@@ -75,7 +75,7 @@ class Seeder
     attributes = (count..target).map { |i|
       {
         id: i + 1,
-        name: "#{Faker::SiliconValley.company} #{SecureRandom.hex.upcase[0, 6]}",
+        name: "#{Faker::TvShows::SiliconValley.company} #{SecureRandom.hex.upcase[0, 6]}",
         balance_cents: [0, 50000, 250000].sample,
         balance_currency: "USD",
         created_at: 3.days.ago,
@@ -198,9 +198,9 @@ class Seeder
       creative = Creative.create(
         user: advertiser,
         organization: advertiser.organization,
-        name: Faker::SiliconValley.company,
-        headline: Faker::SiliconValley.invention,
-        body: Faker::SiliconValley.motto,
+        name: Faker::TvShows::SiliconValley.company,
+        headline: Faker::TvShows::SiliconValley.invention,
+        body: Faker::TvShows::SiliconValley.motto,
       )
       advertiser.images.each do |image|
         CreativeImage.create creative: creative, image: image
@@ -229,8 +229,8 @@ class Seeder
             user_id: publisher.id,
             property_type: ENUMS::PROPERTY_TYPES.values.sample,
             status: rand(5).zero? ? ENUMS::PROPERTY_STATUSES.values.sample : ENUMS::PROPERTY_STATUSES::ACTIVE,
-            name: "#{Faker::SiliconValley.invention} #{SecureRandom.hex.upcase[0, 6]}",
-            url: Faker::SiliconValley.url,
+            name: "#{Faker::TvShows::SiliconValley.invention} #{SecureRandom.hex.upcase[0, 6]}",
+            url: Faker::TvShows::SiliconValley.url,
             ad_template: ENUMS::AD_TEMPLATES.values.sample,
             ad_theme: ENUMS::AD_THEMES.values.sample,
             language: ENUMS::LANGUAGES::ENGLISH,
@@ -281,11 +281,11 @@ class Seeder
     @encrypted_password ||= User.new(password: "secret").encrypted_password
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
-    email = Faker::Internet.email("#{first_name} #{last_name} #{SecureRandom.hex[0, 8]}", "-")
+    email = Faker::Internet.email(name: "#{first_name} #{last_name} #{SecureRandom.hex[0, 8]}", separators: "-")
     user = User.new(
       first_name: first_name,
       last_name: last_name,
-      company_name: Faker::SiliconValley.company,
+      company_name: Faker::TvShows::SiliconValley.company,
       email: email,
       encrypted_password: @encrypted_password,
       confirmation_token: Devise.friendly_token,

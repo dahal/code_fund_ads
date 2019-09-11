@@ -16,7 +16,7 @@ class CampaignSeeder
       creative: advertiser.creatives.sample,
       status: ENUMS::CAMPAIGN_STATUSES.values.sample,
       name: "#{Faker::Company.name} #{SecureRandom.hex.to_s[0, 6]}",
-      url: Faker::SiliconValley.url,
+      url: Faker::TvShows::SiliconValley.url,
       start_date: start_date,
       end_date: end_date,
       core_hours_only: rand(5).zero?,
